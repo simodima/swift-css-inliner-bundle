@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Trt\SwiftCssInlinerBundle\Tests;
+namespace Trt\SwiftCssInlinerBundle\Tests\Converter;
 
 use TijsVerkoyen\CssToInlineStyles\Exception;
 use Trt\SwiftCssInlinerBundle\Converter\Converter;
