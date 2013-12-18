@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="trt_swift_css_inliner.converter.plugin.class">Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin</parameter>
+        <parameter key="trt_swift_css_inliner.converter.class">Trt\SwiftCssInlinerBundle\Converter\Converter</parameter>
+    </parameters>
+
+    <services>
+        <service id="trt_swift_css_inliner.css_converter" class="%trt_swift_css_inliner.inliner_class%" />
+
+        <service id="trt_swift_css_inliner.converter" class="%trt_swift_css_inliner.converter.class%">
+            <argument type="service" id="trt_swift_css_inliner.css_converter"/>
+        </service>
+
+        <service id="trt_swift_css_inliner.converter.plugin" class="%trt_swift_css_inliner.converter.plugin.class%">
+            <argument type="service" id="trt_swift_css_inliner.converter" />
+            <tag name="swiftmailer.default.plugin" />
+        </service>
+    </services>
+
+</container>
