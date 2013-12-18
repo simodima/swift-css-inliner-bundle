@@ -1,5 +1,6 @@
 swift-css-inliner-bundle
 ========================
+[![Latest Stable Version](https://poser.pugx.org/trt/swift-css-inliner-bundle/v/stable.png)](https://packagist.org/packages/trt/swift-css-inliner-bundle)
 
 A Swiftmailer plugin that provides css inline features
 
