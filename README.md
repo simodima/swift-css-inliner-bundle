@@ -2,19 +2,18 @@ swift-css-inliner-bundle
 ========================
 [![Latest Stable Version](https://poser.pugx.org/trt/swift-css-inliner-bundle/v/stable.png)](https://packagist.org/packages/trt/swift-css-inliner-bundle)
 
-A Swiftmailer plugin that provides css inline features
+When HTML emails are viewed in browser-based email apps (like YahooMail!, Gmail, Hotmail, etc), those applications strip out the HEAD and BODY tags by default, so the only way to style the content is to place inline the CSS within the style attribute.
+This is a dirty work for frontenders.
+This plugin provides exactly the CSS processing to fille the style attributes.
 
 #1.  Installation
 
 ####Add the dependency within the ```composer.json```
 
 ```json
-    [...]
     "require": {
-        ...
         "trt/swift-css-inliner-bundle": "dev-master"
     }
-    [...]
 ```
 
 run ``` /$ ./composer.phar install```
