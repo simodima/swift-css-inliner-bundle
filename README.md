@@ -45,7 +45,7 @@ $message = \Swift_Message::newInstance()
 
 ```php
 $message->getHeaders()->addTextHeader(
-    CssInlinerPlugin::CSS_HEADER_KEY,
+    CssInlinerPlugin::CSS_HEADER_KEY,  //The key that say to the plugin "Apply this CSS"
     ".text{ color: red; }"
 );
 ```
