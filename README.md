@@ -53,6 +53,6 @@ $message->getHeaders()->addTextHeader(
 
 ####Send the message.
 
-``php
+``` php
 $this->get('mailer')->send($message);
 ```
