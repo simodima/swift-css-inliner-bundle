@@ -72,6 +72,9 @@ class CssInlinerPluginTest extends \PHPUnit_Framework_TestCase
         $headerSet->expects($this->any())
             ->method('getAll')
             ->will($this->returnValue($headers));
+        $headerSet->expects($this->once())
+            ->method('remove')
+            ->with($this->equalTo(CssInlinerPlugin::CSS_HEADER_KEY));
 
         return $headerSet;
     }

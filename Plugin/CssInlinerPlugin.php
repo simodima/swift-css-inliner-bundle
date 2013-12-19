@@ -35,6 +35,7 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
             $evt->getMessage()->setBody(
                 $this->converter->convert($evt->getMessage()->getBody(), $style)
             );
+            $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY);
         }
     }
 
