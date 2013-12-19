@@ -18,12 +18,11 @@ This plugin provides exactly the CSS processing to fille the style attributes.
     }
 ```
 
-run ``` /$ ./composer.phar install```
+run `php composer.phar install`
 
 ####Enable the bundle (add the following line within the AppKernel.php)
 
 ```php
-
 $bundles = array(
     [...]
     new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
