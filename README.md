@@ -18,12 +18,11 @@ This plugin provides exactly the CSS processing to fille the style attributes.
     }
 ```
 
-run ``` /$ ./composer.phar install```
+run `php composer.phar install`
 
 ####Enable the bundle (add the following line within the AppKernel.php)
 
 ```php
-
 $bundles = array(
     [...]
     new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
@@ -47,7 +46,7 @@ $message = \Swift_Message::newInstance()
 
 ```php
 $message->getHeaders()->addTextHeader(
-    CssInlinerPlugin::CSS_HEADER_KEY,  //The key that say to the plugin "Apply this CSS"
+    CssInlinerPlugin::CSS_HEADER_KEY, //The key that say to the plugin "Apply this CSS"
     ".text{ color: red; }"
 );
 ```
