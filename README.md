@@ -42,6 +42,14 @@ $message = \Swift_Message::newInstance()
     ->setBody('<p class="text"> Hello </p>')
 ;
 ```
+####AutoDetect the <style> Html tag
+
+```php
+$message->getHeaders()->addTextHeader(
+    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+);
+```
+
 ####Add your style
 
 ```php

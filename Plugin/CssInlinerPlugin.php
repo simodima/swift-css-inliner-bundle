@@ -16,6 +16,7 @@ use Trt\SwiftCssInlinerBundle\Converter\ConverterInterface;
 class CssInlinerPlugin implements \Swift_Events_SendListener
 {
     const CSS_HEADER_KEY = 'css';
+    const CSS_HEADER_KEY_AUTODETECT = 'css-autodetect';
 
     protected $converter;
 
@@ -31,9 +32,12 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
      */
     public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
-        if($style = $this->detectStylesheet($evt->getMessage()->getHeaders()->getAll())){
+        $styleSheetHeader = $this->detectStylesheetHeader($evt->getMessage()->getHeaders()->getAll());
+        if($styleSheetHeader !== null ){
+
+            $autoDetectCss = ($styleSheetHeader->getFieldName() == self::CSS_HEADER_KEY_AUTODETECT);
             $evt->getMessage()->setBody(
-                $this->converter->convert($evt->getMessage()->getBody(), $style)
+                $this->converter->convert($evt->getMessage()->getBody(), $styleSheetHeader->getFieldBody(), $autoDetectCss)
             );
             $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY);
         }
@@ -50,14 +54,17 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 
     /**
      * @param \Swift_Mime_Header[] $headers
-     * @return String|null
+     * @return \Swift_Mime_Header|null
      */
-    protected function detectStylesheet(array $headers)
+    protected function detectStylesheetHeader(array $headers)
     {
         foreach($headers as $header){
-            if($header->getFieldType() == \Swift_Mime_Header::TYPE_TEXT && $header->getFieldName() === self::CSS_HEADER_KEY){
-
-                return $header->getFieldBody();
+            if(
+                ($header->getFieldType() == \Swift_Mime_Header::TYPE_TEXT && $header->getFieldName() === self::CSS_HEADER_KEY) ||
+                ($header->getFieldType() == \Swift_Mime_Header::TYPE_TEXT && $header->getFieldName() === self::CSS_HEADER_KEY_AUTODETECT)
+            )
+            {
+                return $header;
             }
         }
 

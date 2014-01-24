@@ -24,16 +24,19 @@ class Converter implements ConverterInterface
     }
 
     /**
-     * @param  String $html
+     * @param  String  $html
      *
-     * @param  String $stylesheet
+     * @param  String  $stylesheet
+     *
+     * @param  Boolean $autoDetectCss
      *
      * @return String
      */
-    public function convert($html, $stylesheet)
+    public function convert($html, $stylesheet, $autoDetectCss = false)
     {
         $this->cssConverter->setHTML($html);
         $this->cssConverter->setCSS($stylesheet);
+        $this->cssConverter->setUseInlineStylesBlock($autoDetectCss);
         try{
             $convertedHtml = $this->cssConverter->convert();
         } catch (\Exception $e){

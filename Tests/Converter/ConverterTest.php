@@ -29,8 +29,10 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
      * @param $html
      *
      * @param $css
+     *
+     * @param $detectCssTag
      */
-    public function test_convert($html, $css)
+    public function test_convert($html, $css, $detectCssTag)
     {
         $this->mockedCssConverter->expects($this->once())
             ->method('setHTML')
@@ -46,9 +48,13 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
             ->method('convert')
             ->will($this->returnValue($html . $css));
 
+        $this->mockedCssConverter->expects($this->once())
+            ->method('setUseInlineStylesBlock')
+            ->with($this->equalTo($detectCssTag));
+
         $converter = new Converter($this->mockedCssConverter);
 
-        $processedText = $converter->convert($html, $css);
+        $processedText = $converter->convert($html, $css, $detectCssTag);
 
         $this->assertEquals($html.$css, $processedText);
     }
@@ -91,7 +97,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     public function provideHtmlCss()
     {
         return array(
-            array('<html></html>', '.html{color:red;}')
+            array('<html></html>', '.html{color:red;}', true)
         );
     }
 

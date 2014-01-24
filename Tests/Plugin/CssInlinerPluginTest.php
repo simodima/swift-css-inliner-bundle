@@ -53,7 +53,7 @@ class CssInlinerPluginTest extends \PHPUnit_Framework_TestCase
         $textHeader = $this->getMockBuilder('\Swift_Mime_Headers_UnstructuredHeader')
             ->disableOriginalConstructor()
             ->getMock();
-        $textHeader->expects($this->once())
+        $textHeader->expects($this->any())
             ->method('getFieldName')
             ->will($this->returnValue(CssInlinerPlugin::CSS_HEADER_KEY));
         $textHeader->expects($this->once())
