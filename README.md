@@ -31,7 +31,7 @@ $bundles = array(
 
 #2.  Usage
 
-####Create the swiftmailer message.
+#### Create the swiftmailer message.
 
 ```php
 $message = \Swift_Message::newInstance()
@@ -43,7 +43,7 @@ $message = \Swift_Message::newInstance()
 ;
 ```
 
-####AutoDetect the <style> Html tag
+#### AutoDetect the "style" Html tag
 
 ```php
 $message->getHeaders()->addTextHeader(
@@ -51,7 +51,7 @@ $message->getHeaders()->addTextHeader(
 );
 ```
 
-####Add your style
+#### Add your style
 
 ```php
 $message->getHeaders()->addTextHeader(
@@ -60,7 +60,7 @@ $message->getHeaders()->addTextHeader(
 );
 ```
 
-####Send the message.
+#### Send the message.
 
 ``` php
 $this->get('mailer')->send($message);
