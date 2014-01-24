@@ -9,7 +9,7 @@
     "target-dir": "Trt/SwiftCssInlinerBundle",
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "~2.4",
+        "symfony/symfony": ">=2.3.4",
         "symfony/swiftmailer-bundle": "~2.3",
         "tijsverkoyen/css-to-inline-styles": "1.2.*"
     },
