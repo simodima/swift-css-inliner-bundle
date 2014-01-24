@@ -42,6 +42,7 @@ $message = \Swift_Message::newInstance()
     ->setBody('<p class="text"> Hello </p>')
 ;
 ```
+
 ####AutoDetect the <style> Html tag
 
 ```php
