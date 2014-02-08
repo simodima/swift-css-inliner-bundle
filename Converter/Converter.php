@@ -16,7 +16,7 @@ class Converter implements ConverterInterface
     protected $cssConverter;
 
     /**
-     * @param String $cssConverter
+     * @param  $cssConverter
      */
     public function __construct($cssConverter)
     {

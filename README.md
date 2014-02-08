@@ -31,7 +31,7 @@ $bundles = array(
 
 #2.  Usage
 
-#### Create the swiftmailer message.
+####1. Create the swiftmailer message.
 
 ```php
 $message = \Swift_Message::newInstance()
@@ -43,7 +43,7 @@ $message = \Swift_Message::newInstance()
 ;
 ```
 
-#### AutoDetect the "style" Html tag
+####2. AutoDetect the "style" Html tag
 
 The auto detect mode will find css within the style tag 
 
