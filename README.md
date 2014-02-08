@@ -8,6 +8,8 @@ When HTML emails are viewed in browser-based email apps (like YahooMail!, Gmail,
 This is a dirty work for frontenders.
 This plugin provides exactly the CSS processing to fille the style attributes.
 
+
+Ex. using the [Zurb ink](http://zurb.com/ink/) mail template
 [![Before After Plugin](https://dl.dropboxusercontent.com/u/49536335/before-after.png)](https://dl.dropboxusercontent.com/u/49536335/before-after.png)
 
 #1. Installation
