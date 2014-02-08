@@ -8,7 +8,7 @@ When HTML emails are viewed in browser-based email apps (like YahooMail!, Gmail,
 This is a dirty work for frontenders.
 This plugin provides exactly the CSS processing to fille the style attributes.
 
-#1.  Installation
+#1. Installation
 
 ####Add the dependency within the ```composer.json```
 
@@ -29,7 +29,30 @@ $bundles = array(
 );
 ```
 
-#2.  Usage
+#2. Usage - Full Example
+
+```php
+/**
+ * @Route("/hello/{name}", name="_demo_hello")
+ */
+public function helloAction($name)
+{
+    $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('send@example.com')
+        ->setTo('recipient@example.com')
+        ->setContentType('text/html')
+        ->setBody("<style>.text{ color: red; }</style><p class='text'> $name </p>")
+    ;
+    $message->getHeaders()->addTextHeader(
+        CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+    );
+
+    $this->get('mailer')->send($message);
+}
+```
+
+#3. Usage - Step-by-step example
 
 #### Create the swiftmailer message.
 
