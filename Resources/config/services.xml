@@ -7,10 +7,13 @@
     <parameters>
         <parameter key="trt_swift_css_inliner.converter.plugin.class">Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin</parameter>
         <parameter key="trt_swift_css_inliner.converter.class">Trt\SwiftCssInlinerBundle\Converter\Converter</parameter>
+        <parameter key="trt_swift_css_inliner.header_decoder.class">Trt\SwiftCssInlinerBundle\Plugin\HeaderDecoder</parameter>
     </parameters>
 
     <services>
         <service id="trt_swift_css_inliner.css_converter" class="%trt_swift_css_inliner.inliner_class%" />
+
+        <service id="trt_swift_css_inliner.header_decoder" class="%trt_swift_css_inliner.header_decoder.class%" />
 
         <service id="trt_swift_css_inliner.converter" class="%trt_swift_css_inliner.converter.class%">
             <argument type="service" id="trt_swift_css_inliner.css_converter"/>
@@ -18,6 +21,7 @@
 
         <service id="trt_swift_css_inliner.converter.plugin" class="%trt_swift_css_inliner.converter.plugin.class%">
             <argument type="service" id="trt_swift_css_inliner.converter" />
+            <argument type="service" id="trt_swift_css_inliner.header_decoder" />
             <tag name="swiftmailer.default.plugin" />
         </service>
     </services>

@@ -19,10 +19,12 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
     const CSS_HEADER_KEY_AUTODETECT = 'css-autodetect';
 
     protected $converter;
+    protected $headerDecoder;
 
-    public function __construct(ConverterInterface $converter)
+    public function __construct(ConverterInterface $converter, HeaderDecoder $headerDecoder)
     {
-        $this->converter = $converter;
+        $this->converter        = $converter;
+        $this->headerDecoder    = $headerDecoder;
     }
 
     /**
@@ -36,10 +38,12 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
         if($styleSheetHeader !== null ){
 
             $autoDetectCss = ($styleSheetHeader->getFieldName() == self::CSS_HEADER_KEY_AUTODETECT);
+            $css = $this->headerDecoder->decodeHeader($styleSheetHeader);
             $evt->getMessage()->setBody(
-                $this->converter->convert($evt->getMessage()->getBody(), $styleSheetHeader->getFieldBody(), $autoDetectCss)
+                $this->converter->convert($evt->getMessage()->getBody(), $css, $autoDetectCss)
             );
             $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY);
+            $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY_AUTODETECT);
         }
     }
 

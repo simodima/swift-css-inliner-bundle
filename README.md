@@ -39,11 +39,13 @@ $message = \Swift_Message::newInstance()
     ->setFrom('send@example.com')
     ->setTo('recipient@example.com')
     ->setContentType('text/html')
-    ->setBody('<p class="text"> Hello </p>')
+    ->setBody('<style>.text{color:red;}</style>  <p class="text"> Hello </p>')
 ;
 ```
 
 #### AutoDetect the "style" Html tag
+
+The auto detect mode will find css within the style tag 
 
 ```php
 $message->getHeaders()->addTextHeader(
@@ -51,7 +53,12 @@ $message->getHeaders()->addTextHeader(
 );
 ```
 
-#### Add your style
+#### Add your style explicit
+
+**ATTENTION**
+
+The explicit mode work only with the php IMAP extension installed
+@see [http://www.php.net/manual/en/book.imap.php](http://www.php.net/manual/en/book.imap.php)
 
 ```php
 $message->getHeaders()->addTextHeader(
