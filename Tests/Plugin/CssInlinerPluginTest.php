@@ -108,6 +108,59 @@ class CssInlinerPluginTest extends MailMessageHeadersMock
         $plugin->beforeSendPerformed($eventMessageWithCss);
     }
 
+    public function test_BodyOfAdditionalPartShouldBeConverted()
+    {
+        /**
+         * Assumes that the php IMAP extension was not installed.
+         */
+        $this->mockedHeaderDecoder->expects($this->any())
+            ->method('decodeHeader')
+            ->will($this->returnValue(''));
 
+        $part = $this->getMock('Swift_Mime_MimeEntity');
+
+        $part->expects($this->any())
+            ->method('getBody')
+            ->will($this->returnValue('<html><p>test</p></html>'));
+
+        $part->expects($this->any())
+            ->method('getContentType')
+            ->will($this->returnValue('text/html'));
+
+        $part->expects($this->once())
+            ->method('setBody')
+            ->with($this->equalTo('converted body'));
+
+        $mockedMessage = $this->createMockedMessageWithCss(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT,
+            'Plain text',
+            '',
+            'text/plain',
+            array($part)
+        );
+
+        $mockedMessage->expects($this->never())
+            ->method('setBody');
+
+        $eventMessageWithCss = $this->getMockBuilder('\Swift_Events_SendEvent')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $eventMessageWithCss->expects($this->any())
+            ->method('getMessage')
+            ->will($this->returnValue($mockedMessage));
+
+        $this->mockedConverter->expects($this->once())
+            ->method('convert')
+            ->with(
+                $this->equalTo('<html><p>test</p></html>'),
+                $this->equalTo(''),
+                $this->equalTo(true)
+            )
+            ->will($this->returnValue('converted body'))
+        ;
+
+        $plugin = new CssInlinerPlugin($this->mockedConverter, $this->mockedHeaderDecoder);
+        $plugin->beforeSendPerformed($eventMessageWithCss);
+    }
 }
- 

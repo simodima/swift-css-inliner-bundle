@@ -35,15 +35,19 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
     public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
         $styleSheetHeader = $this->detectStylesheetHeader($evt->getMessage()->getHeaders()->getAll());
-        if($styleSheetHeader !== null ){
+        if ($styleSheetHeader !== null) {
 
             $autoDetectCss = ($styleSheetHeader->getFieldName() == self::CSS_HEADER_KEY_AUTODETECT);
             $css = $this->headerDecoder->decodeHeader($styleSheetHeader);
-            $evt->getMessage()->setBody(
-                $this->converter->convert($evt->getMessage()->getBody(), $css, $autoDetectCss)
-            );
+
             $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY);
             $evt->getMessage()->getHeaders()->remove(self::CSS_HEADER_KEY_AUTODETECT);
+
+            $this->processEntity($evt->getMessage(), $css, $autoDetectCss);
+
+            foreach ($evt->getMessage()->getChildren() as $child) {
+                $this->processEntity($child, $css, $autoDetectCss);
+            }
         }
     }
 
@@ -73,5 +77,19 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
         }
 
         return null;
+    }
+
+    /**
+     * Converts the body's content of the entity.
+     *
+     * @param \Swift_Mime_MimeEntity $entity        A Swift_Mime_MimeEntity instance
+     * @param string                 $css           The css content
+     * @param bool                   $autoDetectCss If true, will be used styles blocks
+     */
+    private function processEntity(\Swift_Mime_MimeEntity $entity, $css, $autoDetectCss)
+    {
+        if ($entity->getContentType() === 'text/html') {
+            $entity->setBody($this->converter->convert($entity->getBody(), $css, $autoDetectCss));
+        }
     }
 }

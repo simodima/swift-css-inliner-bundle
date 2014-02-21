@@ -41,7 +41,7 @@ class MailMessageHeadersMock extends \PHPUnit_Framework_TestCase
         return $headerSet;
     }
 
-    protected function createMockedMessageWithCss($headerName, $body, $css)
+    protected function createMockedMessageWithCss($headerName, $body, $css, $contentType = 'text/html', array $parts = array())
     {
         $message = $this->getMockBuilder('Swift_Mime_Message')
             ->disableOriginalConstructor()
@@ -52,8 +52,13 @@ class MailMessageHeadersMock extends \PHPUnit_Framework_TestCase
         $message->expects($this->any())
             ->method('getBody')
             ->will($this->returnValue($body));
+        $message->expects($this->any())
+            ->method('getContentType')
+            ->will($this->returnValue($contentType));
+        $message->expects($this->any())
+            ->method('getChildren')
+            ->will($this->returnValue($parts));
 
         return $message;
     }
 }
- 
