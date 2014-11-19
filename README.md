@@ -18,7 +18,7 @@ Ex. using the [Zurb ink](http://zurb.com/ink/) mail template
 
 ```json
     "require": {
-        "trt/swift-css-inliner-bundle": "dev-master"
+        "trt/swift-css-inliner-bundle": "~0.3"
     }
 ```
 
