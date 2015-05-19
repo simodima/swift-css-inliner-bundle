@@ -22,6 +22,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('inliner_class')->defaultValue('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')->end()
+                ->booleanNode('cleanup')->defaultFalse()->end()
+                ->booleanNode('strip_original_style_tags')->defaultFalse()->end()
+                ->booleanNode('exclude_media_queries')->defaultTrue()->end()
             ->end()
         ;
 
