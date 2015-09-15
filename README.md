@@ -3,6 +3,7 @@ swift-css-inliner-bundle
 [![Latest Stable Version](https://poser.pugx.org/trt/swift-css-inliner-bundle/v/stable.png)](https://packagist.org/packages/trt/swift-css-inliner-bundle)
 [![Build Status](https://travis-ci.org/toretto460/swift-css-inliner-bundle.png)](https://travis-ci.org/toretto460/swift-css-inliner-bundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/toretto460/swift-css-inliner-bundle/badges/quality-score.png?s=7e5a05fb9346c1443c8235eca5376bbf31553b3d)](https://scrutinizer-ci.com/g/toretto460/swift-css-inliner-bundle/)
+[![Total Downloads](https://poser.pugx.org/trt/swift-css-inliner-bundle/downloads)](https://packagist.org/packages/trt/swift-css-inliner-bundle)
 
 When HTML emails are viewed in browser-based email apps (like YahooMail!, Gmail, Hotmail, etc), those applications strip out the HEAD and BODY tags by default, so the only way to style the content is to place inline the CSS within the style attribute.
 This is a dirty work for frontenders.
