@@ -99,3 +99,18 @@ $message->getHeaders()->addTextHeader(
 ``` php
 $this->get('mailer')->send($message);
 ```
+
+#4. Configuration options
+
+No configuration is necessary.
+
+It is possible to customize the behaviour of the [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles) class. This shows the default options:
+
+``` yaml
+# app/config/config.yml
+trt_swift_css_inliner:
+    inliner_class: TijsVerkoyen\CssToInlineStyles\CssToInlineStyles
+    cleanup: false
+    strip_original_style_tags: false
+    exclude_media_queries: true
+```

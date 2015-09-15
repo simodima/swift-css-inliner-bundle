@@ -21,7 +21,11 @@ class TrtSwiftCssInlinerExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
         $container->setParameter($this->getAlias().'.inliner_class', $config['inliner_class']);
+        $container->setParameter($this->getAlias().'.cleanup', $config['cleanup']);
+        $container->setParameter($this->getAlias().'.strip_original_style_tags', $config['strip_original_style_tags']);
+        $container->setParameter($this->getAlias().'.exclude_media_queries', $config['exclude_media_queries']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

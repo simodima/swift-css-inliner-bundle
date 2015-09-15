@@ -11,7 +11,17 @@
     </parameters>
 
     <services>
-        <service id="trt_swift_css_inliner.css_converter" class="%trt_swift_css_inliner.inliner_class%" />
+        <service id="trt_swift_css_inliner.css_converter" class="%trt_swift_css_inliner.inliner_class%">
+            <call method="setCleanup">
+                <argument>%trt_swift_css_inliner.cleanup%</argument>
+            </call>
+            <call method="setStripOriginalStyleTags">
+                <argument>%trt_swift_css_inliner.strip_original_style_tags%</argument>
+            </call>
+            <call method="setExcludeMediaQueries">
+                <argument>%trt_swift_css_inliner.exclude_media_queries%</argument>
+            </call>
+        </service>
 
         <service id="trt_swift_css_inliner.header_decoder" class="%trt_swift_css_inliner.header_decoder.class%" />
 
